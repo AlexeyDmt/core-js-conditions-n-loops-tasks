@@ -305,22 +305,22 @@ function isContainNumber(num, digit) {
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
 function getBalanceIndex(arr) {
-  let balance = -1;
+  if (arr.length === 0) return -1;
+
+  let sum = 0;
   for (let i = 0; i < arr.length; i += 1) {
-    let sumLeft = 0;
-    for (let l = 0; l < i; l += 1) {
-      sumLeft += arr[l];
-    }
-    let sumRight = 0;
-    for (let r = i + 1; r < arr.length; r += 1) {
-      sumRight += arr[r];
-    }
-    if (sumLeft === sumRight) {
-      balance = i;
-      break;
-    }
+    sum += arr[i];
   }
-  return balance;
+
+  let sumLeft = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    const sumRight = sum - sumLeft - arr[i];
+    if (sumLeft === sumRight) return i;
+
+    sumLeft += arr[i];
+  }
+
+  return -1;
 }
 
 /**
