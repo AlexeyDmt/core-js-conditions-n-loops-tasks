@@ -305,18 +305,15 @@ function isContainNumber(num, digit) {
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
 function getBalanceIndex(arr) {
-  if (arr.length === 0) return -1;
-
   let sum = 0;
   for (let i = 0; i < arr.length; i += 1) {
     sum += arr[i];
   }
 
   let sumLeft = 0;
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = arr.length - 1; i >= 0; i -= 1) {
     const sumRight = sum - sumLeft - arr[i];
     if (sumLeft === sumRight) return i;
-
     sumLeft += arr[i];
   }
 
@@ -445,7 +442,8 @@ function rotateMatrix(matrix) {
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
 function sortByAsc(arr) {
-  if (!arr || arr.length <= 1) return arr;
+  if (!arr) return arr;
+  if (arr.length <= 1) return arr;
   const a = arr;
 
   for (let i = 0; i < arr.length - 1; i += 1) {
